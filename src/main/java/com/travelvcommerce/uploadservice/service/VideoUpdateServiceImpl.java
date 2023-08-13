@@ -204,6 +204,7 @@ public class VideoUpdateServiceImpl implements VideoUpdateService {
     public DenormalizedVideoDto denormalizeVideo(Video video, UpdatedField updatedField) {
         DenormalizedVideoDto denormalizedVideoDto = DenormalizedVideoDto.builder()
                 .videoId(video.getVideoId())
+                .videoName(video.getVideoName())
                 .sellerId(video.getUploader().getSellerId())
                 .updatedAt(video.getUpdatedAt().toString())
                 .build();
@@ -238,7 +239,6 @@ public class VideoUpdateServiceImpl implements VideoUpdateService {
                     denormalizedVideoDto.setSellerLogo(Base64.getEncoder().encodeToString(uploader.getSellerLogo()));
                     return denormalizedVideoDto;
                 case VIDEO_NAME:
-                    denormalizedVideoDto.setVideoName(video.getVideoName());
                     return denormalizedVideoDto;
                 default:
                     throw new IllegalArgumentException("invalid update field");
